@@ -1,0 +1,118 @@
+<div class="container-fluid min-vh-100 text-white d-flex justify-content-center align-items-center"
+    style="background-color: #66bad34d;">
+    <div class="container-fluid bg-white text-dark w-75 d-flex flex-wrap justify-content-center rounded-5 "
+        style="box-shadow: 0px 1px 20px 1px grey;">
+        <div class="my-auto  h-100">
+            <!-- <h1>hii</h1> -->
+            <img src="../../../assets/ecfb9ffd184bceec03b3c19161eee7fd.jpg" alt="Login Background Image"
+                class="w-100 h-100 image-fluid rounded-5">
+        </div>
+        <div class="my-auto  h-100 ">
+            <!-- <h2>h2</h2> -->
+            <form  [formGroup]="signupform" (submit)="submitdata()">
+
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3 text-center">
+                            <h3 class="">Signup Form </h3>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" name="name" formControlName="name" id="name" aria-describedby="helpId"
+                                placeholder=""  [ngClass]="{'is-invalid': submitted && f['name'].errors}"/>
+                                <div class="invalid-feedback" *ngIf="submitted && f['name'].errors">
+                                    <div *ngIf="f['name'].errors['required']">Name is required</div>
+                                </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg">
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" id="password" formControlName="password" aria-describedby="helpId"
+                                placeholder=""  [ngClass]="{'is-invalid': submitted && f['password'].errors}"/>
+                                <div class="invalid-feedback" *ngIf="submitted && f['password'].errors">
+                                    <div *ngIf="f['password'].errors['required']">Password is required</div>
+                                </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-Mail</label>
+                            <input type="email" class="form-control" name="email" id="email" formControlName="email" aria-describedby="helpId"
+                                placeholder=""  [ngClass]="{'is-invalid': submitted && f['email'].errors}"/>
+                                <div class="invalid-feedback" *ngIf="submitted && f['email'].errors">
+                                    <div *ngIf="f['email'].errors['required']">Email is required</div>
+                                    <div *ngIf="f['email'].errors['email']">Please provide valid Email</div>
+                                </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg">
+                        <div class="mb-3">
+                            <label for="role" class="form-label">Role</label>
+                            <select class="form-select form-select-lg" name="role" id="role" formControlName="role"  [ngClass]="{'is-invalid': submitted && f['role'].errors}">
+                                <option selected value="user">User</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                            <div class="invalid-feedback" *ngIf="submitted && f['role'].errors">
+                                <div *ngIf="f['role'].errors['required']">role is required</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg">
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea class="form-control" name="address" id="address" aria-describedby="helpId"
+                                placeholder="" formControlName="address"  [ngClass]="{'is-invalid': submitted && f['address'].errors}"></textarea>
+                                <div class="invalid-feedback" *ngIf="submitted && f['address'].errors">
+                                    <div *ngIf="f['address'].errors['required']">address is required</div>
+                                </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg">
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Profile Image</label>
+                            <input type="file" class="form-control" name="image" id="image" aria-describedby="helpId"
+                                placeholder="" formControlName="image" />
+                            <small id="helpId" class="form-text text-muted">Help text</small>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary w-100">
+                                Submit
+                            </button>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="text-center">
+                        <a routerLink="/auth/login">Login</a>
+                        <a routerLink="/page" class="ms-2">Home</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

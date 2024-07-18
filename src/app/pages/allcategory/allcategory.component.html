@@ -1,0 +1,93 @@
+<div class="container mt-5 mb-4">
+    <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalId" id="open">
+        Add Category
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">
+                        Category
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <form [formGroup]="categoryform" (submit)="submitdata()">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Category Name</label>
+                                <input type="text" class="form-control" id="name" name="name" formControlName="name" [ngClass]="{'is-invalid': submitted && f['name'].errors}">
+                                <div class="invalid-feedback" *ngIf="submitted && f['name'].errors">
+                                    <div *ngIf="f['name'].errors['required']">Category Name is required</div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Category Image</label>
+                                <input type="file" class="form-control" id="image" name="image" (change)="onFileSelect($event)" formControlName="image" [ngClass]="{'is-invalid': submitted && f['image'].errors}">
+                            </div>
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    Submit
+                                </button>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="close" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Button trigger modal -->
+
+
+
+
+<div class="mb-3">
+    <p-button type="button" icon="pi pi-chevron-left" (click)="prev()" [disabled]="isFirstPage()"
+        styleClass="p-button-text"></p-button>
+    <p-button type="button" icon="pi pi-refresh" (click)="reset()" styleClass="p-button-text"></p-button>
+    <p-button type="button" icon="pi pi-chevron-right" (click)="next()" [disabled]="isLastPage()"
+        styleClass="p-button-text"></p-button>
+</div>
+<p-table [value]="categorydata" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" (onPage)="pageChange($event)"
+    [rowsPerPageOptions]="[10, 25, 50]">
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width:25%">Name</th>
+            <th style="width:25%">Image</th>
+            <th style="width:25%">Edit</th>
+            <th style="width:25%">Delete</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-customer>
+        <tr>
+            <td>{{ customer.name }}</td>
+            <td><img src="http://localhost:3000/{{customer.image}}" width="80px" height="80px" class="rounded-5" alt="" srcset=""></td>
+            <td><button type="submit" class="btn btn-outline-warning" (click)="updatecategory(customer)">
+                    Edit
+                </button>
+            </td>
+            <td><button type="submit" class="btn btn-outline-danger" (click)="deletecategory(customer._id)">
+                    Delete
+                </button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="paginatorleft">
+        <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+    </ng-template>
+    <ng-template pTemplate="paginatorright">
+        <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-table>
